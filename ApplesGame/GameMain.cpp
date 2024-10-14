@@ -5,7 +5,7 @@ using namespace sf;
 
 int main()
 {
-	RenderWindow window(VideoMode(SCREEN_SIZE, SCREEN_SIZE), "ArkanoidGame!");
+	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "ArkanoidGame!");
 	{
 		Game game;
 		game.InitGame();

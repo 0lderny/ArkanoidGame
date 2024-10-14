@@ -1,15 +1,38 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "Math.h"
 #include "Platform.h"
 #include "Ball.h"
-#include "Math.h"
+#include "Block.h"
+#include "Text.h"
 
 class Game
 {
+	enum GameState
+	{
+		MainMenu,
+		Start,
+		GameOver,
+		Pause,
+		Exit
+	};
+	
 	Platform platform;
 	Ball ball;
+	Block block;
+	
+	GameState gameState = MainMenu;
+	bool gameResult = 0;
+
+	Texts playText;
+	Texts exitText;
+	Texts winText;
+	Texts loseText;
+	Texts playAgainText;
+	Texts mainMenuText;
 
 public:
+	Game();
 	void InitGame();
 	void UpdateGame(float deltaTime);
 	void RestartGame();

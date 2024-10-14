@@ -1,29 +1,24 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
 #include <cassert>
 #include "Math.h"
 #include "const.h"
 using namespace sf;
 
-class Platform
+class Platform final : public GameObject
 {
 	Texture tPlatform;
 	Sprite sPlatform;
-	Position position;
-	float speed = 333;
-	int size = 100;
+	float m_speed = 450;
 	bool start = false;
 
 public:
 	Platform();
-	Position getPosition() const { return position; }
-	float getX() const { return position.x; }
-	float getY() const { return position.y; }
-	float getSpeed() const { return speed; }
-	int getSize() const { return size; }
+	float getSpeed() const { return m_speed; }
 
-	void reset();
-	void move(float deltaTime);
-	void draw(RenderWindow& window);
+	void reset() override;
+	void move(float deltaTime) override;
+	void draw(RenderWindow& window) override;
 	bool isStart();
 };

@@ -1,41 +1,39 @@
 #include "Ball.h"
 
-Ball::Ball()
+Ball::Ball() : GameObject(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT - 25.f, 15)
 {
 	reset();
 
 	ball.setFillColor(Color::White);
-	ball.setOrigin(radius, radius);
-	ball.setRadius(radius);
+	ball.setOrigin(m_size, m_size);
+	ball.setRadius(m_size);
 }
 
 void Ball::reset()
 {
-	position.x = SCREEN_SIZE / 2.f;
-	position.y = SCREEN_SIZE - 25.f;
-	ball.setPosition(position.x, position.y);
-	direction = { speed, -speed };
+	m_position.x = SCREEN_WIDTH / 2.f;
+	m_position.y = SCREEN_HEIGHT - 30.f;
+	ball.setPosition(m_position.x, m_position.y);
+	direction = { m_speed, m_speed };
 }
 
 void Ball::move(float deltaTime)
 {
-	position.x += direction.x * deltaTime;
-	position.y += direction.y * deltaTime;
-	ball.setPosition(position.x, position.y);
+	m_position.x += direction.x * deltaTime;
+	m_position.y += direction.y * deltaTime;
+	ball.setPosition(m_position.x, m_position.y);
 }
 
-void Ball::changeX()
+void Ball::changeDirection(bool dir)
 {
-	direction.x = -direction.x;
-}
-
-void Ball::changeY()
-{
-	direction.y = -direction.y;
+	if (dir)
+		direction.x = -direction.x;
+	else
+		direction.y = -direction.y;
 }
 
 void Ball::draw(RenderWindow& window)
 {
-	ball.setPosition(position.x, position.y);
+	ball.setPosition(m_position.x, m_position.y);
 	window.draw(ball);
 }
