@@ -14,7 +14,8 @@ class Game
 		Start,
 		GameOver,
 		Pause,
-		Exit
+		Exit, 
+		Settings
 	};
 	
 	Platform platform;
