@@ -5,6 +5,7 @@ using namespace sf;
 
 int main()
 {
+	srand(static_cast<unsigned int>(time(nullptr)));
 	RenderWindow window(VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "ArkanoidGame!");
 	{
 		Game game;

@@ -4,6 +4,7 @@
 #include "Platform.h"
 #include "Ball.h"
 #include "Block.h"
+#include "RockBlock.h"
 #include "Text.h"
 
 class Game
@@ -21,6 +22,7 @@ class Game
 	Platform platform;
 	Ball ball;
 	Block block;
+	RockBlock rockBlock;
 	
 	GameState gameState = MainMenu;
 	bool gameResult = 0;

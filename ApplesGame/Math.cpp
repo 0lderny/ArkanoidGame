@@ -1,5 +1,10 @@
 #include "Math.h"
 
+int getRandomNumber(int min, int max)
+{
+	return rand() % (max - min + 1) + min;
+}
+
 void setSpriteSize(sf::Sprite& sprite, float desiredWidth, float desiredHeight)
 {
 	sf::FloatRect spriteRect = sprite.getLocalBounds();
@@ -49,10 +54,10 @@ bool isCollidePlatformY(const Position& ballPos, const float& ballSize, const Po
 
 bool isCollideBlockX(const Position& ballPos, const float& ballSize, const Position& blockPos, const float& blockSize)
 {
-	if ((ballPos.x + ballSize / 2.f) > (blockPos.x - blockSize / 2.f) &&
-		(ballPos.x - ballSize / 2.f) < (blockPos.x + blockSize / 2.f) &&
-		(ballPos.y + ballSize / 2.f) > (blockPos.y - blockSize / 2.f) &&
-		(ballPos.y - ballSize / 2.f) < (blockPos.y + blockSize / 2.f))
+	if ((ballPos.x + ballSize / 2.f) >= (blockPos.x - blockSize / 2.f) &&
+		(ballPos.x - ballSize / 2.f) <= (blockPos.x + blockSize / 2.f) &&
+		(ballPos.y + ballSize / 2.f) >= (blockPos.y - blockSize / 2.f) &&
+		(ballPos.y - ballSize / 2.f) <= (blockPos.y + blockSize / 2.f))
 		if (ballPos.x < blockPos.x - blockSize / 2.f || ballPos.x > blockPos.x + blockSize / 2.f)
 			return true;
 	return false;
@@ -60,11 +65,12 @@ bool isCollideBlockX(const Position& ballPos, const float& ballSize, const Posit
 bool isCollideBlockY(const Position& ballPos, const float& ballSize, const Position& blockPos, const float& blockSize)
 {
 	if ((ballPos.y + ballSize / 2.f) >= (blockPos.y - blockSize / 2.f) &&
-		(ballPos.y - ballSize / 2.f) < (blockPos.y + blockSize / 2.f) &&
-		(ballPos.x + ballSize / 2.f) > (blockPos.x - blockSize / 2.f) &&
-		(ballPos.x - ballSize / 2.f) < (blockPos.x + blockSize / 2.f))
+		(ballPos.y - ballSize / 2.f) <= (blockPos.y + blockSize / 2.f) &&
+		(ballPos.x + ballSize / 2.f) >= (blockPos.x - blockSize / 2.f) &&
+		(ballPos.x - ballSize / 2.f) <= (blockPos.x + blockSize / 2.f))
 		if (ballPos.y < blockPos.y - blockSize / 2.f || ballPos.y > blockPos.y + blockSize / 2.f)
 			return true;
 	return false;
 }
+
 

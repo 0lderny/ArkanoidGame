@@ -1,6 +1,10 @@
 #include "Block.h"
 
-Block::Block(int initialNum) : GameObject(35), initialNumBlocks(initialNum) {
+Block::Block() : Block(26) {
+
+}
+
+Block::Block(int initialNum) : GameObject(35), m_initialNumBlocks(initialNum) {
 
 	reset();
 }
@@ -18,18 +22,18 @@ void Block::remove(int index)
 	for (int i = 0; i < index; ++i)
 	{
 		block[i] = m_block[i];
-		position[i] = mi_position[i];
+		position[i] = mb_position[i];
 	}
 	for (int i = index; i < m_numBlocks - 1; ++i)
 	{
 		block[i] = m_block[i + 1];
-		position[i] = mi_position[i + 1];
+		position[i] = mb_position[i + 1];
 	}
 
 	delete[] m_block;
-	delete[] mi_position;
+	delete[] mb_position;
 	m_block = block;
-	mi_position = position;
+	mb_position = position;
 	--m_numBlocks;
 
 	for (int i = 0; i < m_numBlocks; ++i)
@@ -44,24 +48,21 @@ void Block::remove(int index)
 void Block::reset()
 {	
 	delete[] m_block;
-	delete[] mi_position;
+	delete[] mb_position;
 
-	m_numBlocks = initialNumBlocks;
+	m_numBlocks = m_initialNumBlocks;
 
-	m_block = new RectangleShape[initialNumBlocks];
-	mi_position = new Position[initialNumBlocks];
-	for (int i = 0; i < initialNumBlocks; ++i)
+	m_block = new RectangleShape[m_initialNumBlocks];
+	mb_position = new Position[m_initialNumBlocks];
+	for (int i = 0; i < m_initialNumBlocks; ++i)
 	{
 		m_block[i].setFillColor(Color::Red);
 		m_block[i].setOrigin(m_size / 2.f, m_size / 2.f);
 		m_block[i].setSize(Vector2f(m_size, m_size));
-	}
 
-	for (int i = 0; i < initialNumBlocks; ++i)
-	{
-		mi_position[i].x = 40 * (i + 1);
-		mi_position[i].y = 25;
-		m_block[i].setPosition(mi_position[i].x, mi_position[i].y);
+		mb_position[i].x = 40 * (i + 1);
+		mb_position[i].y = 140;
+		m_block[i].setPosition(mb_position[i].x, mb_position[i].y);
 	}
 }
 

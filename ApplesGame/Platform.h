@@ -10,7 +10,7 @@ class Platform final : public GameObject
 {
 	Texture tPlatform;
 	Sprite sPlatform;
-	float m_speed = 450;
+	float m_speed = 600;
 	bool start = false;
 
 public:

@@ -8,6 +8,8 @@ struct Position
 	float y;
 };
 
+int getRandomNumber(int min, int max);
+
 void setSpriteSize(sf::Sprite& sprite, float desiredWidth, float desiredHeight);
 
 void setSpriteRelativeOrigin(sf::Sprite& sprite, float originX, float originY);

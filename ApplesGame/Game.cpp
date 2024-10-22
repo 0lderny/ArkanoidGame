@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-	: platform(), ball(), block(26), 
+	: platform(), ball(), block(), rockBlock(),
 	playText("Play", 450, 250, 100), exitText("Exit", 440, 400, 100),
 	winText("You won!", 330, 75, 125), loseText("You lost", 350, 75, 125),
 	playAgainText("Play again", 410, 250, 75), mainMenuText("Main Menu", 400, 350, 75) {
@@ -38,6 +38,20 @@ void Game::UpdateGame(float deltaTime)
 		if (isCollidePlatformY(ball.getPosition(), ball.getSize(), platform.getPosition(), platform.getSize()))
 			ball.changeDirection(false);
 
+		for (int i = 0; i < rockBlock.getNumBlocks(); ++i)
+		{
+			if (isCollideBlockX(ball.getPosition(), ball.getSize(), rockBlock.getPosition(i), rockBlock.getSize()))
+			{
+				ball.changeDirection(true);
+				rockBlock.remove(i);
+			}
+			if (isCollideBlockY(ball.getPosition(), ball.getSize(), rockBlock.getPosition(i), rockBlock.getSize()))
+			{
+				ball.changeDirection(false);
+				rockBlock.remove(i);
+			}
+		}
+
 		for (int i = 0; i < block.getNumBlocks(); ++i)
 		{
 			if (isCollideBlockX(ball.getPosition(), ball.getSize(), block.getPosition(i), block.getSize()))
@@ -57,7 +71,7 @@ void Game::UpdateGame(float deltaTime)
 			gameResult = false;
 			gameState = GameOver;
 		}
-		else if (block.noBlocks())
+		else if (block.noBlocks() && rockBlock.noBlocks())
 		{
 			gameResult = true;
 			gameState = GameOver;
@@ -82,6 +96,7 @@ void Game::RestartGame()
 	platform.reset();
 	ball.reset();
 	block.reset();
+	rockBlock.reset();
 }
 
 void Game::DrawGame(RenderWindow& window)
@@ -96,6 +111,7 @@ void Game::DrawGame(RenderWindow& window)
 		platform.draw(window);
 		ball.draw(window);
 		block.draw(window);
+		rockBlock.draw(window);
 	}
 	else if (gameState == GameOver)
 	{

@@ -5,17 +5,19 @@
 #include "Math.h"
 using namespace sf;
 
-class Block : public GameObject
+class RockBlock : public GameObject
 {
 	RectangleShape* m_block;
 	Position* mb_position;
+	int* m_hit;
+	int* m_color;
 	const int m_initialNumBlocks;
 	int m_numBlocks;
 
 public:
-	Block();
-	Block(int numBlocks);
-	~Block();
+	RockBlock();
+	RockBlock(int numBlocks);
+	~RockBlock();
 	Position getPosition(int index) const { return mb_position[index]; }
 	int getNumBlocks() const { return m_numBlocks; }
 	int getSize() const { return m_size; }
